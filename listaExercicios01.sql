@@ -7,3 +7,5 @@ SELECT livros.titulo FROM livros INNER JOIN autores ON livros.autor_id = autores
 SELECT alunos.nome FROM alunos INNER JOIN matriculas ON alunos.id = matriculas.aluno_id AND matriculas.curso = 'Engenharia de Software'; /*Exercício 4*/
 
 SELECT produto, SUM(receita) as soma_receita FROM vendas GROUP BY produto; /*Exercício 5*/
+
+SELECT nome, COUNT(*) as total_livros FROM autores INNER JOIN livros ON livros.autor_id = autores.id GROUP BY nome; /*Exercício 6*/
