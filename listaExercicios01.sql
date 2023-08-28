@@ -15,3 +15,5 @@ SELECT matriculas.curso, COUNT(alunos.id) AS total_alunos FROM matriculas INNER 
 SELECT vendas.produto, AVG(receita) as media_receita FROM vendas GROUP BY produto; /*Exercício 8*/
 
 SELECT produto, SUM(receita) AS receita_total FROM vendas GROUP BY produto HAVING SUM(receita) > 10000; /*Exercício 9*/
+
+SELECT nome, COUNT(*) as total_livros FROM autores INNER JOIN livros ON livros.autor_id = autores.id GROUP BY nome HAVING COUNT(*) = 2; /*Exercício 10*/
