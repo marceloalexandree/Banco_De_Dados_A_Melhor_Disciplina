@@ -31,3 +31,5 @@ SELECT matriculas.curso, alunos.nome FROM alunos INNER JOIN matriculas ON matric
 SELECT nome, COUNT(*) as total_livros FROM autores INNER JOIN livros ON livros.autor_id = autores.id GROUP BY nome ORDER BY COUNT(*) DESC LIMIT 1; /*Exercício 16*/
 
 SELECT produto, SUM(receita) as soma_receita FROM vendas GROUP BY produto ORDER BY COUNT(*) ASC LIMIT 1; /*Exercício 17*/
+
+SELECT autores.nome, SUM(20) as receita_total FROM autores LEFT JOIN livros ON autores.id = livros.autor_id GROUP BY autores.id; /*Exercício 18*/
