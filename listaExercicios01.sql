@@ -23,3 +23,5 @@ SELECT livros.titulo, autores.nome FROM livros LEFT JOIN autores ON livros.autor
 SELECT alunos.nome, matriculas.curso FROM alunos LEFT JOIN matriculas ON alunos.id = matriculas.aluno_id; /*Exercício 12*/
 
 SELECT autores.nome, livros.titulo FROM autores LEFT JOIN livros ON livros.autor_id = autores.id; /*Exercício 13*/
+
+SELECT matriculas.curso, alunos.nome FROM alunos RIGHT JOIN matriculas ON matriculas.aluno_id = alunos.id; /*Exercício 14*/
