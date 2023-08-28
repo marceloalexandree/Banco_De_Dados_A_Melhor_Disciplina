@@ -35,3 +35,5 @@ SELECT produto, SUM(receita) as soma_receita FROM vendas GROUP BY produto ORDER 
 SELECT autores.nome, SUM(20) as receita_total FROM autores LEFT JOIN livros ON autores.id = livros.autor_id GROUP BY autores.id; /*Exercício 18*/
 
 SELECT alunos.nome, COUNT(*) as qtd_matriculas FROM matriculas INNER JOIN alunos ON matriculas.aluno_id = alunos.id GROUP BY nome; /*Exercício 19*/
+
+SELECT produto, COUNT(*) as qtd_receitas FROM vendas GROUP BY produto ORDER BY COUNT(*) DESC LIMIT 1; /*Exercício 20*/
