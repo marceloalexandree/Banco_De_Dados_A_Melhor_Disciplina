@@ -9,3 +9,5 @@ SELECT alunos.nome FROM alunos INNER JOIN matriculas ON alunos.id = matriculas.a
 SELECT produto, SUM(receita) as soma_receita FROM vendas GROUP BY produto; /*Exercício 5*/
 
 SELECT nome, COUNT(*) as total_livros FROM autores INNER JOIN livros ON livros.autor_id = autores.id GROUP BY nome; /*Exercício 6*/
+
+SELECT matriculas.curso, COUNT(alunos.id) AS total_alunos FROM matriculas INNER JOIN alunos ON matriculas.aluno_id = alunos.id GROUP BY curso; /*Exercício 7*/
