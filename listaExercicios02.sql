@@ -14,3 +14,10 @@ END;
 // DELIMITER ;
 CALL sp_LivrosPorCategoria('Romance'); /*Exercício 2*/
 
+DELIMITER //
+CREATE PROCEDURE sp_ContarLivrosPorCategoria(IN Nome_Categoria VARCHAR(100))
+BEGIN
+	SELECT Categoria.Nome, COUNT(*) AS qtd_livros FROM Livro INNER JOIN Categoria ON Categoria.Categoria_ID = Livro.Categoria_ID WHERE Categoria.Nome = Nome_Categoria GROUP BY Nome;
+END;
+// DELIMITER ;
+CALL sp_ContarLivrosPorCategoria('Autoajuda'); /*Exercício 3*/
