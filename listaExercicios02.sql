@@ -41,3 +41,12 @@ END;
 // DELIMITER ;
 CALL sp_VerificarLivrosCategoria('Autoajuda', @Possui_Livros);
 SELECT @Possui_Livros; /*Exercício 4*/
+
+
+DELIMITER //
+CREATE PROCEDURE sp_LivrosAteAno(ano INT)
+BEGIN
+	SELECT Titulo FROM Livro WHERE Ano_Publicacao = ano;
+END;
+// DELIMITER ;
+CALL sp_LivrosAteAno('2005'); /*Exercício 5*/
