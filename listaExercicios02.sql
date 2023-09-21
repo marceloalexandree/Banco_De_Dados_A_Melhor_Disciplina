@@ -77,10 +77,20 @@ END;
 CALL sp_AdicionarLivro('Marcelo Gostoso'); /*Exercício 7*/
 
 
+DELIMITER // /*Delimitador: restringe o início e fim da procedure*/
+CREATE PROCEDURE sp_AutorAntigo() /*Criação da procedure*/
+BEGIN /*Marca o início do que a procedure irá executar*/
+	SELECT Nome FROM Autor ORDER BY Data_Nascimento LIMIT  1; /*Faz uma consulta do atributo Nome da tabela Livro ordenando do pelo atributo Data_Nascimento e retornando apenas o mais velho*/
+END; /*Marca o fim do que a procedure irá executar*/
+// DELIMITER ; /*Delimitador: restringe o início e fim da procedure*/
+CALL sp_AutorAntigo(); /*Chamada da procedure criada*/ /*Exercício 8*/
+
+/*Exercício 9 - Explicação do Exercício 8*/
+
 DELIMITER // 
-CREATE PROCEDURE sp_AutorAntigo()
+CREATE PROCEDURE sp_LivrosESeusAutores()
 BEGIN
-	SELECT Nome FROM Autor ORDER BY Data_Nascimento LIMIT  1;
+	SELECT Livro.Titulo, Autor.Nome, Autor.Sobrenome FROM Livro INNER JOIN Autor_Livro INNER JOIN Autor ON Autor_Livro.Autor_ID = Autor.Autor_ID AND Livro.Livro_ID = Autor_Livro.Livro_ID;
 END;
 // DELIMITER ;
-CALL sp_AutorAntigo(); /*Exercício 8*/
+CALL sp_LivrosESeusAutores(); /*Exercício 10*/
