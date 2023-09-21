@@ -1,4 +1,4 @@
-DELIMITER // /*Exercício 1*/
+DELIMITER // 
 CREATE PROCEDURE sp_ListarAutores()
 BEGIN
 	SELECT Nome FROM Autor;
@@ -7,7 +7,7 @@ END;
 CALL sp_ListarAutores(); /*Exercício 1*/
 
 
-DELIMITER // /*Exercício 2*/
+DELIMITER //
 CREATE PROCEDURE sp_LivrosPorCategoria(IN Nome_Categoria VARCHAR(100))
 BEGIN
 	SELECT Titulo FROM Livro INNER JOIN Categoria ON Livro.Categoria_ID = Categoria.Categoria_ID AND Categoria.Nome = Nome_Categoria;
@@ -25,7 +25,7 @@ END;
 CALL sp_ContarLivrosPorCategoria('Autoajuda'); /*Exercício 3*/
 
 
-DELIMITER // /*Exercício 4*/
+DELIMITER // 
 DROP PROCEDURE sp_VerificarLivrosCategoria;
 CREATE PROCEDURE sp_VerificarLivrosCategoria(IN Nome_Categoria VARCHAR(100), OUT Possui_Livros VARCHAR(25))
 BEGIN
@@ -43,7 +43,7 @@ CALL sp_VerificarLivrosCategoria('Autoajuda', @Possui_Livros);
 SELECT @Possui_Livros; /*Exercício 4*/
 
 
-DELIMITER // /*Exercício 5*/
+DELIMITER // 
 CREATE PROCEDURE sp_LivrosAteAno(ano INT)
 BEGIN
 	SELECT Titulo FROM Livro WHERE Ano_Publicacao = ano;
@@ -52,7 +52,7 @@ END;
 CALL sp_LivrosAteAno('2005'); /*Exercício 5*/
 
 
-DELIMITER // /*Exercício 6*/
+DELIMITER // 
 CREATE PROCEDURE sp_TitulosPorCategoria(IN Nome_Categoria VARCHAR(100))
 BEGIN
 	SELECT Livro.Titulo FROM Livro INNER JOIN Categoria WHERE Categoria.Categoria_ID = Livro.Categoria_ID AND Categoria.Nome = Nome_Categoria;
@@ -61,7 +61,7 @@ END;
 CALL sp_TitulosPorCategoria('Romance'); /*Exercício 6*/
 
 
-DELIMITER // /*Exercício 7*/
+DELIMITER // 
 DROP PROCEDURE sp_AdicionarLivro;
 CREATE PROCEDURE sp_AdicionarLivro(IN Nome_Livro VARCHAR(100))
 BEGIN
@@ -75,3 +75,12 @@ BEGIN
 END;
 // DELIMITER ;
 CALL sp_AdicionarLivro('Marcelo Gostoso'); /*Exercício 7*/
+
+
+DELIMITER // 
+CREATE PROCEDURE sp_AutorAntigo()
+BEGIN
+	SELECT Nome FROM Autor ORDER BY Data_Nascimento LIMIT  1;
+END;
+// DELIMITER ;
+CALL sp_AutorAntigo(); /*Exercício 8*/
