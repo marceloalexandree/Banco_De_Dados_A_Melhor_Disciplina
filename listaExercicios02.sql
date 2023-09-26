@@ -26,7 +26,6 @@ CALL sp_ContarLivrosPorCategoria('Autoajuda'); /*Exercício 3*/
 
 
 DELIMITER // 
-DROP PROCEDURE sp_VerificarLivrosCategoria;
 CREATE PROCEDURE sp_VerificarLivrosCategoria(IN Nome_Categoria VARCHAR(100), OUT Possui_Livros VARCHAR(25))
 BEGIN
 	DECLARE qtd_livros INT;
@@ -62,7 +61,6 @@ CALL sp_TitulosPorCategoria('Romance'); /*Exercício 6*/
 
 
 DELIMITER // 
-DROP PROCEDURE sp_AdicionarLivro;
 CREATE PROCEDURE sp_AdicionarLivro(IN Nome_Livro VARCHAR(100))
 BEGIN
 	DECLARE qtd_livros INT;
