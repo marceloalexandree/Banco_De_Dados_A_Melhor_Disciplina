@@ -46,3 +46,15 @@ INSERT INTO eventos (data_evento) VALUES (NOW());
 SELECT MIN(data_evento) AS evento1, MAX(data_evento) AS evento2, DATEDIFF(MAX(data_evento), MIN(data_evento)) AS tempo FROM eventos;
 
 SELECT data_evento, DAYNAME(data_evento) AS semana FROM eventos;
+
+/*Funções de Controle de Fluxo*/
+
+SELECT produto, IF(quantidade > 0, 'Em estoque', 'Fora de estoque') AS estoque FROM produtos;
+
+SELECT produto, 
+	CASE
+        WHEN preco < 25.00 THEN 'Barato'
+        WHEN preco >= 25.00 AND preco < 50.00 THEN 'Médio'
+        ELSE 'Caro'
+    END 
+    AS categoria FROM produtos;
