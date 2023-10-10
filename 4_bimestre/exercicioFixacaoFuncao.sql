@@ -74,3 +74,13 @@ END;
 
 SELECT produto, TOTAL_VALOR(preco, quantidade) AS total FROM produtos;
 
+
+/*Funções de Agregação*/
+
+SELECT COUNT(*) AS qtd_produtos FROM produtos;
+
+SELECT produto, MAX(preco) AS preco FROM produtos GROUP BY produto;
+
+SELECT produto, MIN(preco) AS preco FROM produtos GROUP BY produto;
+
+SELECT SUM(IF(quantidade > 0, quantidade, 0)) AS qtd_estoque FROM produtos;
