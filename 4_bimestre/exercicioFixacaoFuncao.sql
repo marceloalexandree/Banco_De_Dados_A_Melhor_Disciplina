@@ -84,3 +84,33 @@ SELECT produto, MAX(preco) AS preco FROM produtos GROUP BY produto;
 SELECT produto, MIN(preco) AS preco FROM produtos GROUP BY produto;
 
 SELECT SUM(IF(quantidade > 0, quantidade, 0)) AS qtd_estoque FROM produtos;
+
+/*Criando funções*/
+
+DELIMITER //
+CREATE FUNCTION fatorial(numero INT)
+RETURNS INT DETERMINISTIC
+BEGIN
+    DECLARE resultado INT DEFAULT 1;
+    DECLARE contador INT;
+    SET contador = numero;
+    WHILE contador > 1 DO
+        SET resultado = resultado * contador;
+        SET contador = contador - 1;
+    END WHILE;
+    RETURN resultado;
+END;
+// DELIMITER ;
+
+CREATE FUNCTION exponecial(numero INT, expoente INT)
+RETURNS INT DETERMINISTIC
+BEGIN
+    DECLARE resultado INT;
+    SET resultado = numero;
+    WHILE expoente > 1 DO
+        SET resultado = resultado * numero;
+        SET expoente = expoente - 1;
+    END WHILE;
+    RETURN resultado;
+END;
+// DELIMITER ;
