@@ -8,3 +8,9 @@ INSERT INTO nomes (nome) VALUES
 ('Roberto'),
 ('Maria Clara'),
 ('João');
+
+SELECT UPPER(nome) AS nomes FROM nomes;
+
+SELECT nome, LENGTH(nome) AS tamanho FROM nomes;
+
+SELECT CONCAT(IF(nome = 'Roberto' or nome = 'João', 'Sr. ', 'Sra. '), nome) AS nome FROM nomes;
