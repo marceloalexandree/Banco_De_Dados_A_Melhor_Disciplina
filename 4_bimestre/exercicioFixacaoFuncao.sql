@@ -58,3 +58,19 @@ SELECT produto,
         ELSE 'Caro'
     END 
     AS categoria FROM produtos;
+
+
+/*Função Personalizada*/
+
+DELIMITER //
+CREATE FUNCTION TOTAL_VALOR(preco DECIMAL(10, 3), quantidade SMALLINT)
+RETURNS DECIMAL(10, 3) DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10, 3);
+    SET total = preco * quantidade;
+    RETURN total;
+END;
+// DELIMITER ;
+
+SELECT produto, TOTAL_VALOR(preco, quantidade) AS total FROM produtos;
+
