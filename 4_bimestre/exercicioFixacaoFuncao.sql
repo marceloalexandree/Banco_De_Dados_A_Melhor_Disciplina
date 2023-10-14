@@ -114,3 +114,17 @@ BEGIN
     RETURN resultado;
 END;
 // DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION palindromo(palavra VARCHAR(255))
+RETURNS INT DETERMINISTIC
+BEGIN
+	DECLARE inverso VARCHAR(255);
+    SELECT REVERSE(palavra) INTO inverso;
+    IF palavra = inverso THEN
+		RETURN 1;
+	ELSE
+		RETURN 0;
+	END IF;
+END;
+// DELIMITER ;
