@@ -134,3 +134,35 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+/*Função para Listar Autores sem Livros Publicados*/
+DELIMITER //
+CREATE FUNCTION autores_sem_livros()
+RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+    DECLARE fechar INT;
+    DECLARE contagem_autor INT;
+    DECLARE lista_autores VARCHAR(255);
+
+    DECLARE cursor_autor CURSOR FOR SELECT id FROM Autor;
+        
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET fechar = 0;
+    
+    OPEN cursor_autor;
+    autor_loop: LOOP
+        FETCH cursor_autor INTO contagem_autor;
+        IF fechar = 0 THEN
+            LEAVE autor_loop;
+        END IF;
+        IF (SELECT COUNT(*) FROM Livro_Autor WHERE id_autor = contagem_autor) = 0 THEN
+            SET lista_autores = CONCAT(lista_autores, (SELECT CONCAT(primeiro_nome, ultimo_nome) FROM Autor WHERE id = contagem_autor), ',');
+        END IF;
+    END LOOP;
+    
+    CLOSE cursor_autor;
+    
+    RETURN lista_autores;
+END
+//
+DELIMITER ;
