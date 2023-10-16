@@ -74,8 +74,7 @@ BEGIN
     DECLARE x_id INT;
     DECLARE x_resumo TEXT;
     
-    DECLARE cursor_livros CURSOR FOR
-        SELECT id, resumo FROM Livro;
+    DECLARE cursor_livros CURSOR FOR SELECT id, resumo FROM Livro;
         
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET fechar = 0;
     
@@ -95,6 +94,43 @@ BEGIN
     
     CLOSE cursor_livros;
     RETURN 'Resumos atualizados';
+END;
+//
+DELIMITER ;
+
+/*Função para Obter a Média de Livros por Editora*/
+DELIMITER //
+CREATE FUNCTION media_livros_por_editora()
+RETURNS DECIMAL(10,3)
+DETERMINISTIC
+BEGIN
+    DECLARE fechar INT;
+    DECLARE x_livro INT DEFAULT 0;
+    DECLARE x_editora INT DEFAULT 0;
+    DECLARE media_livros_por_editora DECIMAL(10,3) DEFAULT 0;
+    
+    DECLARE cursor_editora CURSOR FOR SELECT id FROM Editora;
+    
+	DECLARE cursor_livro CURSOR FOR SELECT COUNT(*) FROM Livro WHERE id_editora = x_editora;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET fechar = 0;
+    
+    OPEN cursor_editora;
+    editora_loop: LOOP
+        FETCH cursor_editora INTO x_editora;
+        IF fechar = 0 THEN
+            LEAVE editora_loop;
+        END IF;
+        
+        OPEN cursor_livro;
+			FETCH cursor_livro INTO x_livro;
+        CLOSE cursor_livro;
+        
+        SET media_livros_por_editora = media_livros_por_editora + (x_livro / (SELECT COUNT(*) FROM Editora));
+    END LOOP editora_loop;
+    
+    CLOSE cursor_editora;
+    
+    RETURN media_livros_por_editora;
 END;
 //
 DELIMITER ;
