@@ -9,3 +9,9 @@ CREATE TRIGGER after_clientes_delete
 	AFTER DELETE ON Clientes
 	FOR EACH ROW
 INSERT INTO Auditoria (mensagem) VALUES ('Tentativa de exclusão');
+
+/*Exercício 3*/
+CREATE TRIGGER before_clientes_update
+	BEFORE UPDATE ON Clientes
+	FOR EACH ROW
+INSERT INTO Auditoria (mensagem) VALUES (concat("Antigo: ", old.nome, "Novo: ", new.nome));
