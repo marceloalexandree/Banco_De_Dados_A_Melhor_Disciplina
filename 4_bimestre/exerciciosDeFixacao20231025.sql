@@ -15,3 +15,15 @@ CREATE TRIGGER before_clientes_update
 	BEFORE UPDATE ON Clientes
 	FOR EACH ROW
 INSERT INTO Auditoria (mensagem) VALUES (concat("Antigo: ", old.nome, "Novo: ", new.nome));
+
+/*Exercício 4*/
+DELIMITER //
+CREATE TRIGGER not_null_clientes
+	BEFORE UPDATE ON Clientes
+	FOR EACH ROW
+	IF new.nome is NULL or new.nome = '' THEN
+		UPDATE Clientes SET nome = old.nome;
+		INSERT INTO Auditoria (mensagem) VALUES ('Cliente Nulo');
+	END IF;
+//
+DELIMITER ;
